@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat App - API Setup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'space': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'neon-purple': '#bb86fc',
+                        'neon-green': '#00ffab',
+                        'neon-yellow': '#fdfd96',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-black to-slate-800 min-h-screen font-inter text-white">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-md w-full space-y-8 animate-fade-in">
+            <!-- Header -->
+            <div class="text-center">
+                <div class="inline-block p-4 rounded-full bg-gradient-to-r from-neon-yellow to-neon-green mb-6">
+                    <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-bold font-space bg-gradient-to-r from-neon-yellow to-neon-green bg-clip-text text-transparent mb-2">
+                    API Setup
+                </h1>
+                <p class="text-slate-400 text-lg">Configure your AI provider to start chatting</p>
+            </div>
+
+            <!-- API Form -->
+            <div class="bg-slate-800/50 rounded-lg border border-slate-700 p-8 space-y-6">
+                <div class="text-center">
+                    <h2 class="text-2xl font-semibold font-space text-white mb-2">API Configuration</h2>
+                    <p class="text-slate-400">Enter your API key to enable AI conversations</p>
+                </div>
+
+                <!-- Provider Selection -->
+                <div class="space-y-4">
+                    <label class="block text-sm font-medium text-slate-300">Choose Your AI Provider</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="relative">
+                            <input type="radio" name="provider" value="openai" class="sr-only peer" checked>
+                            <div class="p-4 bg-slate-700 rounded-lg border border-slate-600 peer-checked:border-neon-purple peer-checked:bg-neon-purple/10 cursor-pointer transition-all duration-200">
+                                <div class="text-center">
+                                    <div class="w-8 h-8 mx-auto mb-2 text-neon-purple">
+                                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="font-medium text-white">OpenAI</h3>
+                                    <p class="text-xs text-slate-400">GPT-4o</p>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="relative">
+                            <input type="radio" name="provider" value="together" class="sr-only peer">
+                            <div class="p-4 bg-slate-700 rounded-lg border border-slate-600 peer-checked:border-neon-green peer-checked:bg-neon-green/10 cursor-pointer transition-all duration-200">
+                                <div class="text-center">
+                                    <div class="w-8 h-8 mx-auto mb-2 text-neon-green">
+                                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="font-medium text-white">Together.ai</h3>
+                                    <p class="text-xs text-slate-400">Various Models</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- API Key Input -->
+                <div class="space-y-2">
+                    <label for="apiKey" class="block text-sm font-medium text-slate-300">API Key</label>
+                    <div class="relative">
+                        <input type="password" id="apiKey" name="apiKey" 
+                               class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:border-transparent transition-all duration-200"
+                               placeholder="Enter your API key">
+                        <button type="button" id="togglePassword" class="absolute right-3 top-3 text-slate-400 hover:text-white transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-400">Your API key is encrypted and stored securely</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <button id="saveApiKey" class="flex-1 bg-gradient-to-r from-neon-purple to-neon-green text-black font-semibold py-3 px-6 rounded-lg hover:shadow-lg hover:shadow-neon-purple/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:ring-offset-2 focus:ring-offset-slate-900">
+                        Save & Continue
+                    </button>
+                    <button id="skipSetup" class="flex-1 bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg border border-slate-600 hover:bg-slate-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900">
+                        Skip for Now
+                    </button>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="hidden bg-red-500/20 border border-red-500/50 rounded-lg p-4">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-red-400 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span id="errorText" class="text-red-400 text-sm"></span>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-neon-yellow mr-3 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-sm font-medium text-white mb-1">How to get an API key:</h3>
+                            <div class="text-xs text-slate-400 space-y-1">
+                                <p><strong>OpenAI:</strong> Visit platform.openai.com, sign up, and create an API key</p>
+                                <p><strong>Together.ai:</strong> Go to api.together.xyz, register, and generate your key</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-neon-purple"></div>
+    </div>
+
+    <script src="config.js"></script>
+    <script type="module" src="scripts/firebase-config.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/api.js"></script>
+    <script type="module">
+        import { checkAuthState } from './scripts/auth.js';
+        import { saveApiKey } from './scripts/api.js';
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is authenticated
+            try {
+                const user = await checkAuthState();
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const apiKeyInput = document.getElementById('apiKey');
+            const togglePassword = document.getElementById('togglePassword');
+            const saveApiKeyBtn = document.getElementById('saveApiKey');
+            const skipSetupBtn = document.getElementById('skipSetup');
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = apiKeyInput.type === 'password' ? 'text' : 'password';
+                apiKeyInput.type = type;
+                
+                const icon = type === 'password' ? 
+                    'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' :
+                    'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L8.464 8.464m1.414 1.414L12 12l2.121-2.121m0 0l2.122-2.122M8.464 8.464L6.05 6.05m0 0l-1.415 1.414M6.05 6.05l12.728 12.728';
+                
+                togglePassword.querySelector('path').setAttribute('d', icon);
+            });
+            
+            // Save API key
+            saveApiKeyBtn.addEventListener('click', async function() {
+                const apiKey = apiKeyInput.value.trim();
+                const provider = document.querySelector('input[name="provider"]:checked').value;
+                
+                if (!apiKey) {
+                    showError('Please enter your API key');
+                    return;
+                }
+                
+                loading.classList.remove('hidden');
+                errorMessage.classList.add('hidden');
+                
+                try {
+                    await saveApiKey(apiKey, provider);
+                    window.location.href = 'chat.html';
+                } catch (error) {
+                    console.error('Failed to save API key:', error);
+                    showError('Failed to save API key. Please try again.');
+                } finally {
+                    loading.classList.add('hidden');
+                }
+            });
+            
+            // Skip setup
+            skipSetupBtn.addEventListener('click', function() {
+                window.location.href = 'chat.html';
+            });
+            
+            function showError(message) {
+                errorText.textContent = message;
+                errorMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

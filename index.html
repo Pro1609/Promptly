@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat App - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'space': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'neon-purple': '#bb86fc',
+                        'neon-green': '#00ffab',
+                        'neon-yellow': '#fdfd96',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-black to-slate-800 min-h-screen font-inter text-white">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-md w-full space-y-8 animate-fade-in">
+            <!-- Logo/Brand -->
+            <div class="text-center">
+                <div class="inline-block p-4 rounded-full bg-gradient-to-r from-neon-purple to-neon-green mb-6">
+                    <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-bold font-space bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent mb-2">
+                    AI Chat
+                </h1>
+                <p class="text-slate-400 text-lg">Your intelligent conversation partner</p>
+            </div>
+
+            <!-- Welcome Message -->
+            <div class="text-center space-y-4">
+                <div class="p-6 bg-slate-800/50 rounded-lg border border-slate-700">
+                    <h2 class="text-2xl font-semibold font-space text-neon-yellow mb-2">
+                        Welcome, Shadab
+                    </h2>
+                    <p class="text-slate-300">
+                        Ready to start an intelligent conversation? Click below to begin chatting with AI.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Start Chat Button -->
+            <div class="text-center">
+                <button id="startChatBtn" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-black bg-gradient-to-r from-neon-purple to-neon-green rounded-lg shadow-lg hover:shadow-neon-purple/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-neon-purple focus:ring-offset-2 focus:ring-offset-slate-900">
+                    <svg class="w-5 h-5 mr-2 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                    Start Chat
+                </button>
+            </div>
+
+            <!-- Features -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                <div class="text-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                    <div class="w-8 h-8 mx-auto mb-2 text-neon-green">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-slate-300">Smart AI</h3>
+                </div>
+                <div class="text-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                    <div class="w-8 h-8 mx-auto mb-2 text-neon-purple">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-slate-300">Secure</h3>
+                </div>
+                <div class="text-center p-4 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                    <div class="w-8 h-8 mx-auto mb-2 text-neon-yellow">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-medium text-slate-300">Real-time</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-neon-purple"></div>
+    </div>
+
+    <script src="config.js"></script>
+    <script type="module" src="scripts/firebase-config.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module">
+        import { checkAuthState } from './scripts/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const startChatBtn = document.getElementById('startChatBtn');
+            const loading = document.getElementById('loading');
+            
+            startChatBtn.addEventListener('click', async function() {
+                loading.classList.remove('hidden');
+                
+                try {
+                    const user = await checkAuthState();
+                    if (user) {
+                        // User is logged in, redirect to chat
+                        window.location.href = 'chat.html';
+                    } else {
+                        // User is not logged in, redirect to login
+                        window.location.href = 'login.html';
+                    }
+                } catch (error) {
+                    console.error('Error checking auth state:', error);
+                    // Redirect to login on error
+                    window.location.href = 'login.html';
+                } finally {
+                    loading.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
