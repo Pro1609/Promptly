@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "aigpt-d6410"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

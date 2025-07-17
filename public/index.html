@@ -105,31 +105,30 @@
     <script type="module">
         import { checkAuthState } from './scripts/auth.js';
         
-        document.addEventListener('DOMContentLoaded', function() {
-            const startChatBtn = document.getElementById('startChatBtn');
-            const loading = document.getElementById('loading');
-            
-            startChatBtn.addEventListener('click', async function() {
-                loading.classList.remove('hidden');
-                
-                try {
-                    const user = await checkAuthState();
-                    if (user) {
-                        // User is logged in, redirect to chat
-                        window.location.href = 'chat.html';
-                    } else {
-                        // User is not logged in, redirect to login
-                        window.location.href = 'login.html';
-                    }
-                } catch (error) {
-                    console.error('Error checking auth state:', error);
-                    // Redirect to login on error
-                    window.location.href = 'login.html';
-                } finally {
-                    loading.classList.add('hidden');
-                }
-            });
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  const startChatBtn = document.getElementById('startChatBtn');
+  const loading = document.getElementById('loading');
+
+  startChatBtn.addEventListener('click', async function () {
+    loading.classList.remove('hidden');
+
+    try {
+      const user = await checkAuthState();
+      if (user) {
+        window.location.href = 'chat.html';
+      } else {
+        window.location.href = 'login.html';
+      }
+    } catch (error) {
+      console.error('Error checking auth state:', error);
+      window.location.href = 'login.html';
+    } finally {
+      loading.classList.add('hidden');
+    }
+  });
+});
     </script>
+
+    
 </body>
 </html>
