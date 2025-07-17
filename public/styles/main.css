@@ -1,0 +1,215 @@
+/* Custom animations and styles */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Neon glow effects */
+.hover\:shadow-neon-purple\/25:hover {
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.25);
+}
+
+.hover\:shadow-neon-green\/25:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 171, 0.25);
+}
+
+.hover\:shadow-neon-yellow\/25:hover {
+    box-shadow: 0 0 20px rgba(253, 253, 150, 0.25);
+}
+
+/* Message styling */
+.message {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Suggested message buttons */
+.suggested-message {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.suggested-message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(187, 134, 252, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.suggested-message:hover::before {
+    left: 100%;
+}
+
+/* Radio button styling */
+input[type="radio"]:checked + div {
+    transform: scale(1.02);
+}
+
+/* Textarea auto-resize */
+textarea {
+    resize: none;
+    min-height: 48px;
+    max-height: 120px;
+}
+
+/* Loading spinner */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulse animation for typing indicator */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions */
+* {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Focus styles */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid #bb86fc;
+    outline-offset: 2px;
+}
+
+/* Hover effects */
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Error and success message styling */
+#errorMessage,
+#successMessage {
+    animation: fade-in 0.3s ease-out;
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient-neon {
+    background: linear-gradient(135deg, #bb86fc 0%, #00ffab 100%);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .message {
+        max-width: 85%;
+    }
+    
+    .suggested-message {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Dark mode enhancements */
+.dark {
+    color-scheme: dark;
+}
+
+/* Neon text effects */
+.text-neon-glow {
+    text-shadow: 0 0 10px currentColor;
+}
+
+/* Button hover animations */
+.group:hover .group-hover\:translate-x-1 {
+    transform: translateX(0.25rem);
+}
+
+/* Custom checkbox and radio styling */
+.peer:checked ~ div {
+    box-shadow: 0 0 0 2px #bb86fc;
+}
+
+/* Backdrop blur effects */
+.backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+}
+
+/* Enhanced message bubbles */
+.message-bubble {
+    position: relative;
+}
+
+.message-bubble::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.message-bubble.user::before {
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 8px 0 8px 8px;
+    border-color: transparent transparent transparent #bb86fc;
+}
+
+.message-bubble.assistant::before {
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 8px 8px 8px 0;
+    border-color: transparent #1e293b transparent transparent;
+}
